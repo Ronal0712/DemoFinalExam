@@ -19,6 +19,44 @@ public class CES extends Student {
 	private static ArrayList<Student> list ;
 	
 	private static void ReadFile (String filepath) {
+		Scanner scanner = null;
+		String mName = " ";
+		int mChi = 0,mEng = 0,mMath = 0,mId = 0;
+		float mAvg = 0;
+		if(list == null) {
+			list = new ArrayList<Student>();
+		}else {
+			list.removeAll(list);
+		}
+		try {
+			scanner = new Scanner(new File(filepath));
+			while(scanner.hasNext()) {
+				mId = scanner.nextInt();
+				mName = scanner.next();
+				mChi = scanner.nextInt();
+				mEng = scanner.nextInt();
+				mMath = scanner.nextInt();
+				mAvg = scanner.nextFloat();
+			
+				Student a =  new Student();
+				
+				a.setId(mId);
+				a.setName(mName);
+				a.setChi(mChi);
+				a.setEng(mEng);
+				a.setMath(mMath);
+				a.mAvg = mAvg;
+				
+				list.add(a);
+			}
+		}catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}finally {
+			if(scanner != null) {
+				scanner.close();
+			}
+			
+		}
 		
 	}
 	
@@ -37,7 +75,8 @@ public class CES extends Student {
 			while(flag.hasNext()) {
 				Student s = flag.next();
 				sum = " ";
-				sum = s.getId()+" "+s.getName()+" "+s.getChi()+" "+s.getEng()+ " "+s.getMath()+" "+s.mAvg;
+				sum = s.getId()+" "+s.getName()+" "+s.getChi()+" "+s.getEng()+ " "+s.getMath()
+				+" "+s.mAvg;
 				printWriter.println(sum);
 			}
 			

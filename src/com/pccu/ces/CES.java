@@ -19,15 +19,44 @@ public class CES extends Student {
 	private static ArrayList<Student> list ;
 	
 	private static void ReadFile (String filepath) {
-		/*
-		 * Your Work !
-		 * */
+		
 	}
 	
 	private static void WriteFile (ArrayList<Student> list, String filepath) {
-		/*
-		 * Your Work !
-		 * */
+		String sum = " ";
+		FileWriter fileWriter = null;
+		
+		PrintWriter printWriter = null;
+		
+		try {
+			fileWriter = new FileWriter(filepath);
+			
+			printWriter = new PrintWriter(fileWriter);
+			
+			Iterator<Student> flag = list.iterator();
+			while(flag.hasNext()) {
+				Student s = flag.next();
+				sum = " ";
+				sum = s.getId()+" "+s.getName()+" "+s.getChi()+" "+s.getEng()+ " "+s.getMath()+" "+s.mAvg;
+				printWriter.println(sum);
+			}
+			
+		}catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}finally {
+			if(printWriter != null) {
+				printWriter.close();
+			}
+			if(fileWriter != null) {
+				try {
+				fileWriter.close();
+				}catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
 	private static void ScoreEnrollment () {
